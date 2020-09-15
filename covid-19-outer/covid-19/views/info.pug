@@ -1,0 +1,23 @@
+extends layout
+  
+block content 
+  div.ui.block.header
+    div.ui.container
+      div.ui.placeholder.center.aligned.segment
+            h1.ui.header #{code} Google trends ranking vs number of new positive COVID-19 cases in the state
+            p.instructions 
+              | Lets see how often people in #{code}  google covid in relation to their daily positive case increase.
+    body 
+      div.ui.container
+        div.ui.placeholder.center.aligned.segment 
+          h2 Covid-19 Cases over time 
+          br
+          br
+          br
+          h2 Google Trend Ranking Covid-19
+          p ID #{code}
+          p Labels or Dates: #{labels_cov}
+          p data: #{data_cov}
+          //- p postivie cases: #{data}
+          //- p labels trend : #{data_trends}
+          p values trend: #{data_trends}

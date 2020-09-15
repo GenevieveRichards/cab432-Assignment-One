@@ -1,0 +1,71 @@
+extends layout
+block content
+  div.ui.block.header
+    div.ui.container
+      div.ui.placeholder.center.aligned.segment
+            h1.ui.header America Coronavirus Exporer
+            p.instructions 
+              | <strong> Hover </strong> over each American State to see current covid19 statistics and an overview of what restrictions are in place in each state. 
+              | <strong> Click </strong> on a state to see coronavirus cases over time and query google trend data over the same period to see what trend you find.  
+  body 
+    div.ui.container
+      div.ui.placeholder.center.aligned.segment     
+        #map
+          script.
+            //sets the view to the inital area
+            var statesData = JSON.parse('!{JSON.stringify(countries)}');
+            var map = L.map('map').setView([37.8, -96], 4);
+            var legend = L.control({position: 'bottomright'});
+            var info = L.control({position: "topright"});
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoibjk2NjU1NDQiLCJhIjoiY2tleHo4bmRoMGkzZzJ1bzNqeW1iZ2E0OCJ9.IW7RZ5AngnR7ncjtra7ywA', {
+              id: 'mapbox/light-v9',
+              attribution: "hasjdhas",
+              tileSize: 512,
+              zoomOffset: -1,
+            }).addTo(map);
+
+            geojson = L.geoJson(statesData, {
+              style: style,
+              onEachFeature: onEachFeature
+            }).addTo(map);
+
+            legend.onAdd = function (map) {
+
+                var div = L.DomUtil.create('div', 'info legend'),
+                    grades = [0, 10000, 25000, 50000, 100000, 200000, 300000, 400000, 650000],
+                    labels = [];
+
+                // loop through our density intervals and generate a label with a colored square for each interval
+                for (var i = 0; i < grades.length; i++) {
+                    div.innerHTML +=
+                        '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                }
+
+                return div;
+            };
+
+            info.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+                this.update();
+                return this._div;
+            };
+
+            // method that we will use to update the control based on feature properties passed
+            info.update = function (props, data) {
+              this._div.innerHTML = (props ? '<h3>' + props.name + '</h3>' +
+              '<h4> Corona Statistics </h4>' +  props.density + ' Confirmed Cases (total)' +
+              '<br /><h4 > Current Restrictions & Limitations</h4>' + 
+              'Current Gathering Restrictions: ' + data.regulations.Gathering_Restriction_Code + 
+              '<br /> Face Covering Policy: ' + data.regulations.Face_Covering_Policy_Code + 
+              '<br /> Stay at Home Requirements: ' + data.regulations.Stay_at_Home_Requirement_Code + 
+              '<br /> Restaurant Restrictions: ' + data.regulations.Restaurant_Restrictions_Code
+
+              : 'Hover over a state');
+            };
+
+            legend.addTo(map);
+            info.addTo(map);  
+          br
+          br
+          br

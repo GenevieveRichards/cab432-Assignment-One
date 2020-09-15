@@ -1,0 +1,97 @@
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300);
+@import url(https://fonts.googleapis.com/css?family=Squada+One);
+/* html{
+  height:100%;
+} */
+body {
+  padding: 25px; 
+  overflow-y: visible;
+  height: 100%;
+  background: #eee url(https://subtlepatterns.com/patterns/extra_clean_paper.png);
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1.ui.header {
+  font-family: 'Open Sans', sans-serif;
+  color: #555;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 45px;
+  font-weight: 500;
+  letter-spacing: -3px;
+  line-height: 1;
+  /* text-shadow: #EDEDED 3px 2px 0; */
+  position: relative;
+}
+
+h1.ui.header:after {
+  /*background: url(https://subtlepatterns.com/patterns/crossed_stripes.png) repeat;*/
+  background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, #555 25%, #555 50%, transparent 50%, transparent 75%, #555 75%);
+  background-size: 4px 4px;
+  -webkit-text-fill-color: transparent;
+  z-index: -5;
+  display: block;
+  text-shadow: none;
+}
+
+p.instructions {
+  text-align: center;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+#map {
+  position: fixed;
+  width: 97%;
+  height: 70%;
+  /* margin: 0 0 5px; */
+}
+
+/* canvas.mychart {
+  height: 800;
+  width: 400;
+} */
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 8px;
+    height: 8px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+}
+
+/* The progress bar (scroll indicator) */
+.progress-bar {
+  height: 8px;
+  background: #4caf50;
+  width: 0%;
+}
