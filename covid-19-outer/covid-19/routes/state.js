@@ -23,21 +23,22 @@ router.get('/:code', function (req, res, next) {
     .then((response) => {
       const { data } = response;
       for (let i = (data.length - 1); i > 0; i--) {
-        console.log(data[i])
         labels_cov.push(data[i].date)
         data_cov.push(data[i].positiveIncrease)
         // cov_send.push({ labels: data[i].date, data: data[i].positiveIncrease })
       }
-      googleTrends.interestOverTime({ keyword: 'covid', startTime: new Date('2020-03-04'), geo: geo })
+
+      const mindate = data[(data.length - 1)].date.toString()
+      const reformatmindate = mindate.slice(0, 4) + "-" + mindate.slice(4, 6) + "-" + mindate.slice(6, 8)
+
+      googleTrends.interestOverTime({ keyword: 'covid', startTime: new Date(reformatmindate), geo: geo })
         .then(function (results) {
-          console.log(results)
           var newdata = results.toString()
           newdata = JSON.parse(newdata)
           console.log(newdata)
           const trends = newdata.default.timelineData
 
           for (let j = 0; j < trends.length; j++) {
-            console.log(trends[j])
             date_trends.push(trends[j].formattedAxisTime)
             value_trends.push(trends[j].value)
             // trends_send.push({ label: trends[j].formattedAxisTime, data: trends[j].value})

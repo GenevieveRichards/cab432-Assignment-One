@@ -5,8 +5,6 @@ fetch("/state/:code'")
         let info = data;
         let graph1 = [];
         graph1.push(info.data_cov);
-
-
         const chart = {
             type: 'bar',
             series: [

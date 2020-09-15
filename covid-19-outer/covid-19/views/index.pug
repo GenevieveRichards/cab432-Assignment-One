@@ -54,10 +54,13 @@ block content
             // method that we will use to update the control based on feature properties passed
             info.update = function (props, data) {
               this._div.innerHTML = (props ? '<h3>' + props.name + '</h3>' +
-              '<h4> Corona Statistics </h4>' +  props.density + ' Confirmed Cases (total)' +
-              '<br /><h4 > Current Restrictions & Limitations</h4>' + 
+              '<h4> Corona Statistics </h4> Confirmed Cases (total): ' + props.density +
+              '<br /> Confirmed Deaths (total): ' + props.deaths + 
+              '<br /> Total Hospitalisations (total): ' + props.hospitalized + 
+              '<h4 > Current Restrictions & Limitations</h4>' + 
               'Current Gathering Restrictions: ' + data.regulations.Gathering_Restriction_Code + 
               '<br /> Face Covering Policy: ' + data.regulations.Face_Covering_Policy_Code + 
+              '<br /> Domestic Travel Restrictions: ' + data.regulations.Domestic_Travel_Restrictions_Code +
               '<br /> Stay at Home Requirements: ' + data.regulations.Stay_at_Home_Requirement_Code + 
               '<br /> Restaurant Restrictions: ' + data.regulations.Restaurant_Restrictions_Code
 
