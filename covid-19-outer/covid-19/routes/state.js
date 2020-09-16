@@ -24,7 +24,7 @@ router.get('/:code', function (req, res, next) {
       const { data } = response;
       for (let i = (data.length - 1); i > 0; i--) {
         labels_cov.push(data[i].date)
-        data_cov.push(data[i].positiveIncrease)
+        data_cov.push(Math.abs(data[i].positiveIncrease))
         // cov_send.push({ labels: data[i].date, data: data[i].positiveIncrease })
       }
 

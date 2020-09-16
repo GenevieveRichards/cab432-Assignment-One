@@ -8,16 +8,54 @@ block content
             p.instructions 
               | Lets see how often people in #{code}  google covid in relation to their daily positive case increase.
     body 
-      div.ui.container
-        div.ui.placeholder.center.aligned.segment 
-          h2 Covid-19 Cases over time 
-          br
-          br
-          br
-          h2 Google Trend Ranking Covid-19
-          p ID #{code}
-          p Labels or Dates: #{labels_cov}
-          p data: #{data_cov}
-          //- p postivie cases: #{data}
-          //- p labels trend : #{data_trends}
-          p values trend: #{data_trends}
+      div.ui.canvas1
+        h2 Covid-19 Cases over time 
+        canvas#canvas
+      div.ui.canvas2
+        h2 Google Trend Ranking Covid-19
+        input(type='text', name='imdb', value='coronavirus')
+        input(type='submit', value='Submit')
+        canvas#canvas2
+        script.
+          var ctx = document.getElementById("canvas2");
+          var labels = JSON.stringify('!{labels_cov}');
+          var data_trends = JSON.stringify('!{value_trends}');
+          var ctx_covid = document.getElementById("canvas");
+          var labels = JSON.stringify('!{labels_cov}');
+          //- labels = JSON.parse(labels)
+          var data = JSON.stringify('!{data_cov}');
+          //- data = JSON.parse(data)
+          window.onload = function() {
+          var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+          labels: labels.split(','),
+          datasets: [{
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          label: 'Google Trends Data',
+          data: data_trends.split(','),
+          borderWidth: 1,
+          }]
+          }
+          });
+
+          var  myChart_covid = new Chart(ctx_covid, {
+            type: 'bar',
+            data: {
+            labels: labels.split(','),
+            datasets: [{
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            label: 'Number of New Positive Cases',
+            data: data.split(','),
+            borderWidth: 1,
+            }]
+            }
+
+          });
+          };
+          
+
+
+          
+
+      

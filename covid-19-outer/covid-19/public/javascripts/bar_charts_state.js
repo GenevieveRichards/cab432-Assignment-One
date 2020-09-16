@@ -1,27 +1,6 @@
 
-fetch("/state/:code'")
-    .then((res) => res.json())
-    .then((data) => {
-        let info = data;
-        let graph1 = [];
-        graph1.push(info.data_cov);
-        const chart = {
-            type: 'bar',
-            series: [
-                {
-                    values: graph1
-                }
-            ]
-        };
+//- data = JSON.parse(data)
 
-        // renders zingchart to the page
-        zingchart.render({
-            id: 'chart',
-            data: chart,
-            height: '100%',
-            width: '100%'
-        });
-    });
 
 
 
